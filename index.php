@@ -2,7 +2,7 @@
 date_default_timezone_set('Asia/Tashkent');
 error_reporting(0);
 function get_data_api($city){
-    $connection = mysqli_connect('34.70.127.126', 'root', 'root', 'cs', 3306) or die('Failed to connect to DB');
+    $connection = mysqli_connect('vae.h.filess.io', 'prototype2_bursttown', '2eda018e8f7b9bb9ce88d3f321a320122c5ff806', 'prototype2_bursttown', 3307) or die('Failed to connect to DB');
     $city = mysqli_real_escape_string($connection, $city);
     $url = 'https://api.openweathermap.org/data/2.5/weather?q='.$city.'&units=metric&appid=e1863b8f17319cb49b4c04ddbd09cb6d';
     $data = file_get_contents($url) or die('Invalid City Name');
