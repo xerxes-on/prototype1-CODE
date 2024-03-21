@@ -1,0 +1,68 @@
+.page1{
+    width: 100vw;
+    background-image: url(./images/bg.svg);
+    background-repeat: no-repeat;
+}
+
+.container1{
+    height: 70%;
+    width: 30%;
+    margin-right: 5%;
+    background-color: #8EC5FC;
+    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+    min-width: fit-content;
+    min-height: fit-content;
+    border-radius: 45px;
+}
+h1{
+    text-transform: capitalize;
+    color: #fff;
+    text-align: center;
+    border-radius: 45px;
+}
+.searchbox{
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.cart-img{
+    min-height: fit-content;
+
+    background-color: #000;
+    border-radius: 45px;
+}
+.inp{
+    border: 2px solid #000;
+    border-radius: 25px;
+    width: 65%;
+    height: 50%;
+    font-size: 1rem;
+    margin-right: 5%;
+    padding-left: 5%;
+}
+.btn{
+    border: 2px solid #000;
+    border-radius: 20px;
+    max-width: fit-content;
+    padding: 35% 25%;
+    line-height: 0;
+    min-height: 5vh;
+    max-height: fit-content;
+    font-size: 1.5vw;
+    cursor: pointer;
+}
+
+.w-img{
+    height: 45%;
+   background-image: url(./images/sun.jpg);
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: contain;
+}
+.data{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
