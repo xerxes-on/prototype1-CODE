@@ -1,18 +1,23 @@
 .page1{
     width: 100vw;
+    height: 98vh;
     background-image: url(./images/bg.svg);
     background-repeat: no-repeat;
+    border: 2px solid white;
+    border-radius: 30px 30px 0 0;
 }
 
 .container1{
-    height: 70%;
-    width: 30%;
-    margin-right: 5%;
+    height: 55%;
+    width: 90%;
     background-color: #8EC5FC;
     background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
-    min-width: fit-content;
-    min-height: fit-content;
     border-radius: 45px;
+}
+@media screen and (min-width: 600px) {
+  .container1 {
+    height: 30rem;
+  }
 }
 h1{
     text-transform: capitalize;
@@ -35,30 +40,22 @@ h1{
 .inp{
     border: 2px solid #000;
     border-radius: 25px;
-    width: 65%;
-    height: 50%;
+    min-width: 65%;
+    min-height: 35%;
     font-size: 1rem;
     margin-right: 5%;
     padding-left: 5%;
 }
 .btn{
     border: 2px solid #000;
-    border-radius: 20px;
-    max-width: fit-content;
-    padding: 35% 25%;
-    line-height: 0;
-    min-height: 5vh;
-    max-height: fit-content;
-    font-size: 1.5vw;
     cursor: pointer;
 }
 
 .w-img{
-    height: 45%;
-   background-image: url(./images/sun.jpg);
-   background-repeat: no-repeat;
-   background-position: center;
-   background-size: contain;
+    background-image: url(./images/sun.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 }
 .data{
     display: flex;

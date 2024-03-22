@@ -2,10 +2,15 @@
 date_default_timezone_set('Asia/Tashkent');
 error_reporting(0);
 function get_data_api($city){
-    $connection = mysqli_connect('vae.h.filess.io', 'prototype2_bursttown', '2eda018e8f7b9bb9ce88d3f321a320122c5ff806', 'prototype2_bursttown', 3307) or die('Failed to connect to DB');
+    $connection = mysqli_connect('localhost','root',"",'cs0017', 3306) or die('Failed to connect to DB');
     $city = mysqli_real_escape_string($connection, $city);
     $url = 'https://api.openweathermap.org/data/2.5/weather?q='.$city.'&units=metric&appid=e1863b8f17319cb49b4c04ddbd09cb6d';
-    $data = file_get_contents($url) or die('Invalid City Name');
+    $data = @file_get_contents($url);
+    if ($data === false) {
+        header('Location: index.php?error=invalid_input');
+        exit('Invalid City Name');
+    }
+
     $weather = json_decode($data, true);
     $cityName = $weather["name"];
     $humidity = $weather["main"]["humidity"];
@@ -52,7 +57,6 @@ if (isset($_POST['submit_btn'])){
     $result = $d[0];
     $result['source'] = $source;
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -64,8 +68,18 @@ if (isset($_POST['submit_btn'])){
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="page1 h-screen flex justify-end items-center ">
+<body class="bg-gray-900">
+    <div class="page1 flex sm:justify-end justify-center sm:items-center items-end dark:bg-gray-800 dark:border-gray-700 sm:p-10">
+        <?php
+            if(isset($_GET['error'])) {
+                    echo '
+                <div class="bg-red-100 z-10 border border-red-400 rounded-xl text-red-700 px-4 py-3 rounded left-3 top-3 absolute" id="alert">
+                  <strong class="font-bold">Hey man!</strong>
+                  <span class="block sm:inline">Can u watch out, bad input &#128548;</span>
+                </div>
+                ';
+            }
+        ?>
         <div>
             <div class="cart-img absolute right-10 top-3 p-4 bg-blue-200">
                 <h1 style="font-size: 1.5vw;color: black"><?php
@@ -73,35 +87,36 @@ if (isset($_POST['submit_btn'])){
                     ?></h1>
             </div>
         </div>
-        <div class="container1 flex flex-col shadow-lg p-6 max-w-md ml-auto ">
+        <div class="relative container1 justify-between flex flex-col p-6  sm:w-1/3 mb-5">
             <div class="cart-img">
-                <h1 class="text-4xl p-3"><?php
+                <h1 class="text-xl sm:text-3xl p-2"><?php
                         echo isset($result) ? $result['description']:"City Name";
                     ?></h1>
             </div>
-        <form method="post" class="searchbox">
-            <label class="flex" for="search"></label>
-                <input type="text" class="inp" id='search' name="city" value="<?php
-                            echo isset($result) ? $result['cityname']:"";
-                ?>">
-            <div class="searchbox">
-               <button class="btn" name="submit_btn" value="set">Search</button>
-           </div>
-        </form>
-            <div class="w-img">
+            <form method="post" class="searchbox">
+                <label class="flex" for="search"></label>
+                    <input type="text" class="inp h-1/2" id='search' name="city" value="<?php
+                                echo isset($result) ? $result['cityname']:"";
+                    ?>">
+                <div class="searchbox">
+                   <button class="btn text-xm sm:text-xl p-1 font-bold sm:py-1 sm:px-3 rounded-full" name="submit_btn" value="set">Search</button>
+               </div>
+            </form>
+            <div class="w-img sm:h-1/2 h-1/2 sm:m-6 ">
             </div>
-            <div class="h-1/4 rounded-lg data">
-                <span class="text-6xl"><d id="c-degree"> <?php
+            <div class="static h-1/4 rounded-lg data justify-between flex flex-col">
+                <span class="static text-4xl sm:text-6xl"><d id="c-degree"> <?php
                         echo isset($result) ? $result['temp']:"0";
                         ?></d>&deg;C</span>
-                <span class="text-3xl">Humidity: <d id="humidity"><?php
+                <span class="static text-2xl sm:text-3xl">Humidity: <d id="humidity"><?php
                         echo isset($result) ? $result['humidity']:"0";
                         ?></d> %</span>
-                 <span class="text-xl text-blue-700 font-bold">From: <d id="humidity"><?php
+                 <span class="static text-xm sm:text-xl text-blue-700 font-bold">From: <d id="humidity"><?php
                         echo isset($result) ? $result['source']:"loading...";
                         ?></d></span>
             </div>
         </div>
+
     </div>
     <script src="./script.js"></script>
 </body>
